@@ -110,6 +110,8 @@ var dragNdrop = function(options) {
   var prevPos = { x: 0, y: 0 };
   var constraintElement = constraints && typeof constraints.innerHTML === 'string'; //if constraints = DOM element
 
+  var container=options.container||document;
+
   //check if browser supports hardware accelerated css
   if(!has3d()) {
     console.log('WARNING: dragNdrop: your browser does not support hardware accelerated css. The plugin will still work but do yourself a favor and update your browser.');
@@ -291,15 +293,15 @@ var dragNdrop = function(options) {
     //Add listeners
     if(document.addEventListener) {
       document.addEventListener('mousemove', eleMouseMove, false);
-      document.addEventListener('touchmove', eleMouseMove, false);
+      container.addEventListener('touchmove', eleMouseMove, false);
       document.addEventListener('mouseup', eleMouseUp, false);
-      document.addEventListener('touchend', eleMouseUp, false);
+      container.addEventListener('touchend', eleMouseUp, false);
     } else {
       // support for IE8-
       document.attachEvent('onmousemove', eleMouseMove);
-      document.attachEvent('touchmove', eleMouseMove);
+      container.attachEvent('touchmove', eleMouseMove);
       document.attachEvent('onmouseup', eleMouseUp);
-      document.attachEvent('touchend', eleMouseUp);
+      container.attachEvent('touchend', eleMouseUp);
     }
   }
 
@@ -496,15 +498,15 @@ var dragNdrop = function(options) {
     //remove listeners
     if(document.addEventListener) {
       document.removeEventListener('mousemove', eleMouseMove, false);
-      document.removeEventListener('touchmove', eleMouseMove, false);
+      container.removeEventListener('touchmove', eleMouseMove, false);
       document.removeEventListener('mouseup', eleMouseUp, false);
-      document.removeEventListener('touchend', eleMouseUp, false);
+      container.removeEventListener('touchend', eleMouseUp, false);
     } else {
       // support for IE8-
       document.detachEvent('onmousemove', eleMouseMove);
-      document.detachEvent('touchmove', eleMouseMove);
+      container.detachEvent('touchmove', eleMouseMove);
       document.detachEvent('onmouseup', eleMouseUp);
-      document.detachEvent('touchend', eleMouseUp);
+      container.detachEvent('touchend', eleMouseUp);
     }
   }
 
